@@ -9,7 +9,8 @@ class Person {
         void setName(const std::string& name);
         std::string getName() const; 
         void print() const;
-        
+        void add(const char* detail);
+
     //destructor
         ~Person();
 

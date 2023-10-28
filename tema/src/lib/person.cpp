@@ -1,4 +1,4 @@
-#include "person.h"
+#include "person.hpp"
 #include<iostream>
 #include<cstring>
 
@@ -59,4 +59,23 @@ void Person::print() const {
         std::cout << array[i] << " ";
     }
     std::cout << std::endl;
+}
+
+//functie de adaugat elemente in vector + resize daca e plin
+void Person::add(const char* detail) {
+ if (size == capacity) {
+        //resize daca e plin
+        capacity *= 2;
+        char** newArray = new char*[capacity];
+        for (int i = 0; i < size; i++) {
+            newArray[i] = array[i];
+        }
+        delete[] array;
+        array = newArray;
+    }
+
+    //alocare memorie pentru noul string
+    array[size] = new char[strlen(detail) + 1];
+    strcpy(array[size], detail);
+    size++;
 }
