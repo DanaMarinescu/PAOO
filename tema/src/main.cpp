@@ -1,4 +1,4 @@
-#include "person.hpp"
+#include "lib/person.hpp"
 #include<iostream>
 #include<cstring>
 
@@ -12,11 +12,6 @@ int main() {
 
 //copy constructor
     Person person2 = person1;
-    person2.setName("Alina");
-    person1.add("inalta");
-    person1.add("bruneta");
-    person1.add("25 de ani");
-    person1.add("brutar");
 
 //move constructor
     Person person3(std::move(person2));

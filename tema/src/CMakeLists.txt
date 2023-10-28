@@ -9,9 +9,9 @@ add_subdirectory(lib)
 
 add_executable(PersonApp main.cpp)
 
-target_link_libraries(PersonApp PUBLIC lib)
+target_link_libraries(PersonApp PUBLIC PersonLib)
 
 target_include_directories(PersonApp PUBLIC
                            "${PROJECT_BINARY_DIR}"
-                           "${PROJECT_SOURCE_DIR}/lib"
+                           "${PROJECT_SOURCE_DIR}/lib/include"
                            )

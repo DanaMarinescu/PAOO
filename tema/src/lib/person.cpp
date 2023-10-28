@@ -38,7 +38,7 @@ Person::Person(Person&& person) : size(person.size), capacity(person.capacity), 
     person.size = 0;
     person.capacity = 0;
     person.name = "";
-    std::cout<<"Ai apelat move constructor"<<std::endl;
+    std::cout<<"Ai apelat move constructor!"<<std::endl;
 }
 
 //functie pentru setarea numelui obiectului 'Person'
