@@ -2,12 +2,14 @@
 
 class Person {
     public:
-    //in lista de parametrii ai constructorului, punem ca argument catre constructor o referinta la un obiect constant
-    //(const right value reference)
-        Person(const std::string& name);
+    //constructor default
+        Person();
+        
+    //functii specifice pentru clasa 'Person'
         void setName(const std::string& name);
         std::string getName() const; 
-
+        void print() const;
+        
     //destructor
         ~Person();
 
@@ -19,5 +21,8 @@ class Person {
 
     private:
         std::string name;
+        char** array;
+        int size;
+        int capacity;
 };
 
