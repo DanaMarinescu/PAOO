@@ -1,1 +1,1 @@
-add_library(PersonLib person.cpp)
+add_library(lib person.cpp)
