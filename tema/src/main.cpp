@@ -10,20 +10,28 @@ int main() {
     person1.add("22 de ani");
     person1.add("studenta");
 
+//detalii inainte de move si copy
+std::cout<<"Detalii pentru: (person1) "<<person1.getName()<<std::endl;
+person1.print();
+
 //copy constructor
     Person person2 = person1;
 
-//move constructor
-    Person person3(std::move(person2));
-
-//afisare detalii
-std::cout<<"Detalii pentru: "<<person1.getName()<<std::endl;
+//detalii dupa copy
+std::cout<<"Detalii pentru: (person1) "<<person1.getName()<<std::endl;
 person1.print();
 
-std::cout<<"Detalii pentru: "<<person2.getName()<<std::endl;
+//move constructor
+    Person person3(std::move(person1));
+
+//afisare detalii final
+std::cout<<"Detalii pentru: (person1) "<<person1.getName()<<std::endl;
+person1.print();
+
+std::cout<<"Detalii pentru: (person2) "<<person2.getName()<<std::endl;
 person2.print();
 
-std::cout<<"Detalii pentru: "<<person3.getName()<<std::endl;
+std::cout<<"Detalii pentru: (person3) "<<person3.getName()<<std::endl;
 person3.print();
 
 return 0;

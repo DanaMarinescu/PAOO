@@ -33,11 +33,12 @@ Person::Person(const Person& person) : size(person.size), capacity(person.capaci
 }
 
 //move constructor
-Person::Person(Person&& person) : size(person.size), capacity(person.capacity), name(person.name) {
-    person.array = nullptr;
+Person::Person(Person&& person) : size(person.size), capacity(person.capacity), name(std::move(person.name)) {
+    array = person.array;  //nu reseteaza obiectul sursa, doar muta pointerul la el
+    person.array = nullptr; //dupa mutare pointer, resetam obiectul
     person.size = 0;
     person.capacity = 0;
-    person.name = "";
+
     std::cout<<"Ai apelat move constructor!"<<std::endl;
 }
 
