@@ -1,7 +1,9 @@
 #include "person.hpp"
-#include<iostream>
-#include<cstring>
-
+#include <iostream>
+#include <cstring>
+#include <algorithm> 
+#include <iterator>
+#include <vector>
 //implementarea metodelor clasei
 
 //constructor default
@@ -12,10 +14,6 @@ Person::Person() : size(0), capacity(4), name("") {
 
 //destructor
 Person::~Person() {
-   for (int i = 0; i < size; i++) {
-     delete[] array[i];
-   }
-   
    delete[] array;
    std::cout<<"Ai apelat destructorul!"<<std::endl;
 }
@@ -24,10 +22,7 @@ Person::~Person() {
 Person::Person(const Person& person) : size(person.size), capacity(person.capacity), name(person.name) {
     array = new char*[capacity];
 
-    for (int i = 0; i < size; i++) {
-        array[i] = new char[strlen(person.array[i]) + 1];
-        strcpy(array[i], person.array[i]);
-    }
+    std::copy(person.array, person.array + size, array);
 
     std::cout<<"Ai apelat copy constructor!"<<std::endl;
 }
@@ -56,23 +51,20 @@ std::string Person::getName() const {
 void Person::print() const {
     std::cout<<"Nume: "<<name<<std::endl;
     std::cout<<"Caracteristici: ";
-     for (int i = 0; i < size; i++) {
-        std::cout << array[i] << " ";
-    }
+    std::for_each(array, array + size, [](const char* str) {
+        std::cout << str << " ";
+    });
     std::cout << std::endl;
 }
 
 //functie de adaugat elemente in vector + resize daca e plin
 void Person::add(const char* detail) {
- if (size == capacity) {
+  if (size == capacity) {
         //resize daca e plin
         capacity *= 2;
-        char** newArray = new char*[capacity];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
-        }
-        delete[] array;
-        array = newArray;
+        std::vector<char*> newArray(array, array + size);
+        array = new char*[capacity];
+        std::copy(newArray.begin(), newArray.end(), array);
     }
 
     //alocare memorie pentru noul string
