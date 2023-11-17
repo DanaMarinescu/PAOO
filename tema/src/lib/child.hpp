@@ -13,6 +13,7 @@ namespace PersonManager
         ~Child() override;
         void print() const override;
         std::string getSchool() const;
+        void setSchool(const std::string &school);
 
     private:
         std::string school;
