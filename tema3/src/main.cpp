@@ -17,6 +17,7 @@ int main() {
     // Create instances of producers and consumers
     ProductManagement::Producer producer1(1);
     ProductManagement::Producer producer2(2);
+    ProductManagement::Producer producer3(3);
     ProductManagement::Consumer consumer1(1);
     ProductManagement::Consumer consumer2(2);
 
@@ -25,14 +26,16 @@ int main() {
     producer2.startProducing(buffer, mutex, cv);
     consumer1.startConsuming(buffer, mutex, cv);
     consumer2.startConsuming(buffer, mutex, cv);
+    producer3.startProducing(buffer, mutex, cv);
 
     // Simulate work for a while
-    std::this_thread::sleep_for(std::chrono::seconds(15));
+    std::this_thread::sleep_for(std::chrono::seconds(10));
 
     // Stop producers and consumers
     producer1.stopProducing();
     producer2.stopProducing();
-    consumer1.stopConsuming();
+    consumer1.stopConsuming();    
+    producer3.stopProducing();
     consumer2.stopConsuming();
 
     return 0;

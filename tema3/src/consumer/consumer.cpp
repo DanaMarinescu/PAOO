@@ -8,6 +8,7 @@ namespace ProductManagement {
 
     void Consumer::startConsuming(std::shared_ptr<std::queue<std::shared_ptr<Product>>> buffer,
                                   std::mutex& mutex, std::condition_variable& cv) {
+        std::cout << "Consuming starts!" << std::endl;                  
         isConsuming = true;
 
         consumerThread = std::thread([this, buffer, &mutex, &cv]() {
@@ -19,13 +20,12 @@ namespace ProductManagement {
                 buffer->pop();
                 lock.unlock();
 
-                std::cout << "Consumed: ";
+                std::cout << "Consumed-> ";
                 product->displayInfo();
                 
-                std::cout << "Finished consumer thread!" << std::endl;
+                std::cout << "Product was consumed!" << std::endl;
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
         });
     }
@@ -35,6 +35,8 @@ namespace ProductManagement {
         if (consumerThread.joinable()) {
             consumerThread.join();
         }
+
+        std::cout << "Consumer stoped!" << std::endl;
     }
 
 } // namespace ProductManagement

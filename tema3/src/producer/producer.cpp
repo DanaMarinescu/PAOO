@@ -7,6 +7,7 @@ namespace ProductManagement {
 
     void Producer::startProducing(std::shared_ptr<std::queue<std::shared_ptr<Product>>> buffer,
                                   std::mutex& mutex, std::condition_variable& cv) {
+        std::cout << "Producing starts!" << std::endl;
         isProducing = true;
 
         producerThread = std::thread([this, buffer, &mutex, &cv]() {
@@ -18,10 +19,10 @@ namespace ProductManagement {
                 
                 std::lock_guard<std::mutex> lock(mutex);
                 buffer->push(product);
-                std::cout << "Produced: ";
+                std::cout << "Produced-> ";
                 product->displayInfo();
                 
-                std::cout << "Finished producer thread!" <<std::endl;
+                std::cout << "Product was produced!" << std::endl;
 
                 cv.notify_one();
             }
@@ -33,6 +34,8 @@ namespace ProductManagement {
         if (producerThread.joinable()) {
             producerThread.join();
         }
+
+        std::cout << "Producer stoped!" << std::endl;
     }
 
 } // namespace ProductManagement
